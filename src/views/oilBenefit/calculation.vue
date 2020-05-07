@@ -219,7 +219,7 @@ export default {
       }
       updateDB().then(status => {
         if (status.code === 1) {
-          runModel({ username: this.username, type: 'BenefitInit' }).then(res => {
+          runModel({ username: this.username, type: 'BenefitInit', arr: '' }).then(res => {
             if (res.code === 1) {
               const guid = res.data
               this.getLogOfInit(guid)
@@ -289,7 +289,7 @@ export default {
       if (this.outputLogInterval) {
         return false
       }
-      runModel({ username: this.username, type: 'BenefitCalc', arr: this.selectedRowVals }).then(res => {
+      runModel({ username: this.username, type: 'BenefitCalc', arr: this.selectedRowVals.join(',') }).then(res => {
         if (res.code === 1) {
           const guid = res.data
           this.getLogOfCalculation(guid)

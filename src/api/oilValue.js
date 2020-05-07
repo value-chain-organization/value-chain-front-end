@@ -7,6 +7,7 @@ const api = {
   getTaskLog: '/BenefitCalc/GetTaskLog',
   updateDB: '/BenefitCalc/UpdateDB',
   getDownList: '/BenefitCalc/GetDownList',
+  getLastestList: '/BenefitCalc/GetLatestBenefitRes',
   getBenefitRes: '/BenefitCalc/GetBenefitRes'
 }
 
@@ -460,6 +461,14 @@ export function getDownList ({ username }) {
   return axios({
     url: api.getDownList,
     params: { username },
+    method: 'get'
+  })
+}
+
+// 获取整合数据
+export function getLatestList () {
+  return axios({
+    url: api.getLastestList,
     method: 'get'
   })
 }

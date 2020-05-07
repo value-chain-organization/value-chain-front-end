@@ -1,7 +1,7 @@
 <template>
   <div class="oilBenefit-result">
     <div class="main-block">
-      <div class="header-block">
+      <!-- <div class="header-block">
         <div class="common-block-title">效益测算结果</div>
         <a-dropdown :trigger="['click']" >
           <a-menu slot="overlay" @click="handleMenuClick" >
@@ -11,7 +11,7 @@
             {{ selectMenu }} <a-icon type="down" />
           </a-button>
         </a-dropdown>
-      </div>
+      </div> -->
       <div class="custom-common-table-block">
         <a-table
           ref="table"
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { getOilBenefitInitResult, getDownList } from '@/api/oilValue'
+import { getOilBenefitInitResult, getDownList, getLatestList } from '@/api/oilValue'
 import moment from 'moment'
 
 export default {
@@ -62,16 +62,68 @@ export default {
   filters: {
   },
   mounted () {
-    this.requestMenuList()
+    // this.requestMenuList()
+    this.requestLatestList()
   },
   beforeDestroy () {
     clearTimeout(this.timer)
   },
   methods: {
-    getTableData (filename) {
+    // getTableData (filename) {
+    //   this.tableLoading = true
+    //   getOilBenefitInitResult({ filename: filename }).then(res => {
+    //     console.log(res)
+    //     const rawData = res.data
+    //     const formatData = []
+    //     for (let i = 0; i < rawData.length; i++) {
+    //       formatData.push({
+    //         id: i + 1,
+    //         oid_code: rawData[i].PIMSCode,
+    //         oil_type: rawData[i].PIMSCName,
+    //         opt_config_val: rawData[i].Allocation,
+    //         shadow_price: this.numFilter(rawData[i].ShadowPrice),
+    //         increment_method: this.numFilter(rawData[i].AdditionPrice),
+    //         instead_method: this.numFilter(rawData[i].SubstitutionPrice)
+    //       })
+    //     }
+    //     this.tableData = formatData
+    //     this.tableLoading = false
+    //   })
+    // },
+    // requestDownList () {
+    //   getDownList({ username: 'admin' }).then(res => {
+    //     // console.log(res)
+    //     const menuList = []
+    //     res.data.forEach(item => {
+    //       menuList.push({
+    //         key: item,
+    //         label: item.split('.')[0]
+    //       })
+    //     })
+    //     this.menuList = menuList
+    //     this.selectMenu = menuList[0].label
+    //   })
+    // },
+    // requestMenuList () {
+    //   getDownList({ username: 'admin' }).then(res => {
+    //     // console.log(res)
+    //     const menuList = []
+    //     res.data.forEach(item => {
+    //       menuList.push({
+    //         key: item,
+    //         label: item.split('.')[0]
+    //       })
+    //     })
+    //     this.menuList = menuList
+    //     this.selectMenu = menuList[0].label
+    //     this.getTableData(menuList[0].key)
+    //   })
+    // },
+    requestLatestList () {
       this.tableLoading = true
-      getOilBenefitInitResult({ filename: filename }).then(res => {
-        console.log(res)
+      getLatestList().then(res => {
+        // console.log(res)
+        // this.tableLoading = true
         const rawData = res.data
         const formatData = []
         for (let i = 0; i < rawData.length; i++) {
@@ -89,40 +141,11 @@ export default {
         this.tableLoading = false
       })
     },
-    requestDownList () {
-      getDownList({ username: 'admin' }).then(res => {
-        // console.log(res)
-        const menuList = []
-        res.data.forEach(item => {
-          menuList.push({
-            key: item,
-            label: item.split('.')[0]
-          })
-        })
-        this.menuList = menuList
-        this.selectMenu = menuList[0].label
-      })
-    },
-    requestMenuList () {
-      getDownList({ username: 'admin' }).then(res => {
-        // console.log(res)
-        const menuList = []
-        res.data.forEach(item => {
-          menuList.push({
-            key: item,
-            label: item.split('.')[0]
-          })
-        })
-        this.menuList = menuList
-        this.selectMenu = menuList[0].label
-        this.getTableData(menuList[0].key)
-      })
-    },
-    handleMenuClick (e) {
-      console.log('click', e)
-      this.selectMenu = e.key.split('.')[0]
-      this.getTableData(e.key)
-    },
+    // handleMenuClick (e) {
+    //   console.log('click', e)
+    //   this.selectMenu = e.key.split('.')[0]
+    //   this.getTableData(e.key)
+    // },
 
     handleBack () {
       // this.$router.replace('/oilBenefit/calculation');

@@ -1,0 +1,90 @@
+<!--
+  Copyright (c) 2006-2013, JGraph Ltd
+
+  Hello, World! example for mxGraph. This example demonstrates using
+  a DOM node to create a graph and adding vertices and edges.
+-->
+<html>
+<head>
+  <title>Hello, World! example for mxGraph</title>
+  <script>
+    window.mxLoadResources = false;
+    window.mxLoadStylesheets = false;
+  </script>
+
+  <!-- Loads and initializes the library -->
+  <script src="./mxClient.js"></script>
+  <!--<script src="./Graph.js"></script>-->
+  <script src="../../../node_modules/mxgraph-js/dist/mxgraph-js.js"></script>
+  <!-- Example code -->
+  <script type="text/javascript">
+    // Program starts here. Creates a sample graph in the
+    // DOM node with the specified ID. This function is invoked
+    // from the onLoad event handler of the document (see below).
+    function main(container) {
+
+      let initViewer = () => {
+        return new Promise((resolve, reject) => {
+          mxUtils.get('./default.xml', (xhr) => {
+            var themes = new Object();
+            themes["default"] = xhr.getDocumentElement();
+            resolve()
+          }, () => {
+            reject()
+          })
+        })
+      }
+
+      initViewer().then(()=>{
+
+        // Checks if the browser is supported
+        if (!mx.mxClient.isBrowserSupported()) {
+          // Displays an error message if the browser is not supported.
+          mx.mxUtils.error('Browser is not supported!', 200, false);
+        }
+        else {
+          // Disables the built-in context menu
+          mx.mxEvent.disableContextMenu(container);
+
+          // // Creates the graph inside the given container
+          var graph = new mx.mxGraph(container);
+          //
+          // // Enables rubberband selection
+          // new mx.mxRubberband(graph);
+
+          // Gets the default parent for inserting new cells. This
+          // is normally the first child of the root (ie. layer 0).
+          var parent = graph.getDefaultParent();
+
+          // Adds cells to the model in a single step
+          graph.getModel().beginUpdate();
+          try {
+            let xmlstring = '<mxGraphModel dx="928" dy="525" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none"><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="" style="image;html=1;labelBackgroundColor=#ffffff;image=http://106.15.189.65/data/sftp/device_mxgraph/482e1a20-3e20-4c2f-b3c8-b601eaa794c1.png" vertex="1" parent="1"><mxGeometry x="50" y="120" width="160" height="240" as="geometry"/></mxCell><mxCell id="3" value="压力（MPa）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#00CCCC;fontColor=#FFFFFF;" vertex="1" parent="1"><mxGeometry x="75" y="70" width="110" height="20" as="geometry"/></mxCell><object xl-bind-type="1" xl-bind-bindText="1" xl-bind-device="731" xl-bind-deviceName="1.4MPa储气罐A(1E01A)" xl-bind-deviceId="1903110079" xl-bind-item="1" xl-bind-itemName="1.4MPa储气罐A压力(cqgAPressure14)" tooltip="" id="4"><mxCell style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#00CCCC;fontColor=#FFFFFF;" vertex="1" parent="1"><mxGeometry x="75" y="90" width="110" height="20" as="geometry"/></mxCell></object></root></mxGraphModel>'
+            const xmlDoc = mxUtils.parseXml(xmlstring);
+            const codec = new mxCodec(xmlDoc);
+
+            codec.decode(xmlDoc.documentElement, graph.getModel())
+            // var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 20, 80, 30);
+            // var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 80, 30);
+            // var e1 = graph.insertEdge(parent, null, '', v1, v2);
+          }
+          finally {
+            // Updates the display
+            graph.getModel().endUpdate();
+          }
+        }
+
+      })
+
+    };
+  </script>
+</head>
+
+<!-- Page passes the container for the graph to the program -->
+<body onload="main(document.getElementById('graphContainer'))">
+<!--<body >-->
+
+<!-- Creates a container for the graph with a grid wallpaper -->
+<div id="graphContainer"></div>
+</body>
+</html>

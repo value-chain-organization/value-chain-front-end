@@ -1,0 +1,76 @@
+import Vue from 'vue'
+import { login, getInfo, logout } from '@/api/login'
+import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { welcome } from '@/utils/util'
+
+const user = {
+  state: {
+    token: '',
+    name: '',
+    welcome: '',
+    avatar: '',
+    roles: [],
+    info: {}
+  },
+
+  mutations: {
+    SET_TOKEN: (state, token) => {
+      state.token = token
+    },
+    SET_NAME: (state, name) => {
+      state.name = name
+    },
+    SET_AVATAR: (state, avatar) => {
+      state.avatar = avatar
+    },
+    SET_ROLES: (state, roles) => {
+      state.roles = roles
+    },
+    SET_INFO: (state, info) => {
+      state.info = info
+    }
+  },
+
+  actions: {
+    // 登录
+    Login ({ commit }, userInfo) {
+      return new Promise((resolve, reject) => {
+        login(userInfo).then(response => {
+          if(response.code===1){
+            //登陆成功
+            Vue.ls.set(ACCESS_TOKEN, response.data, 7 * 24 * 60 * 60 * 1000)
+            commit('SET_TOKEN', response.data);
+            getInfo().then(infoRes=>{
+              localStorage.setItem('userName',infoRes.data.username);
+              localStorage.setItem('userrole',infoRes.data.userrole);
+              resolve();
+            });
+          }else {
+            reject(response);
+          }
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+
+    // 登出
+    Logout ({ commit, state }) {
+      return new Promise((resolve) => {
+        logout(state.token).then(() => {
+          localStorage.clear();
+          resolve()
+        }).catch(() => {
+          resolve()
+        }).finally(() => {
+          commit('SET_TOKEN', '')
+          commit('SET_ROLES', [])
+          Vue.ls.remove(ACCESS_TOKEN)
+        })
+      })
+    }
+
+  }
+}
+
+export default user

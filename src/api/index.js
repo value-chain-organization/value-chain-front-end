@@ -1,0 +1,48 @@
+const api = {
+  Login: '/auth/login',
+  Logout: '/auth/logout',
+  ForgePassword: '/auth/forge-password',
+  Register: '/auth/register',
+  twoStepCode: '/auth/2step-code',
+  SendSms: '/account/sms',
+  SendSmsErr: '/account/sms_err',
+  // get my info
+  UserInfo: '/user/info',
+  // plan optimization
+  PIMSModelJiChuShuJu: '/PIMSModel/JiChuShuJu',
+  PIMSModelSPJiChuShuJu: '/PIMSModelSP/JiChuShuJu',
+  PIMSModelTaskLogJiChu: '/PIMSModel/GetTaskLogJiChu',
+  PIMSModelSPTaskLogJiChu: '/PIMSModelSP/GetTaskLogJiChu',
+  PIMSModelCancelTask: '/PIMSModel/CancelTask',
+  PIMSModelSPCancelTask: '/PIMSModelSP/CancelTask',
+  PIMSModelJiaoHe: '/PIMSModel/JiaoHe',
+  PIMSModelSPJiaoHe: '/PIMSModelSP/JiaoHe',
+  PIMSModelTaskLogJiaoHe: '/PIMSModel/GetTaskLogJiaoHe',
+  PIMSModelSPTaskLogJiaoHe: '/PIMSModelSP/GetTaskLogJiaoHe',
+  PIMSModelYouHua: '/PIMSModel/YouHua',
+  PIMSModelSPYouHua: '/PIMSModelSP/YouHua',
+  PIMSModelTaskLogYouHua: '/PIMSModel/GetTaskLogYouHua',
+  PIMSModelSPTaskLogYouHua: '/PIMSModelSP/GetTaskLogYouHua',
+  PIMSModelGetPIMSExecLog: '/PIMSModel/getPIMSExecLog',
+  PIMSModelSPGetPIMSExecLog: '/PIMSModelSP/getPIMSExecLog',
+  PIMSModelGetCache: '/PIMSModel/GetCache',
+  PIMSModelSPGetCache: '/PIMSModelSP/GetCache',
+  PIMSModelOpeartePIMSData: '/PIMSModel/OpeartePIMSData',
+  PIMSModelSPOpeartePIMSData: '/PIMSModelSP/OpeartePIMSData',
+  PIMSModelGenPlanReport: '/PIMSModel/GenPlanReport',
+  PIMSModelSPGenPlanReport: '/PIMSModelSP/GenPlanReport',
+  PIMSModelGetTaskLog: '/PIMSModel/GetTaskLog',
+  PIMSModelSPGetTaskLog: '/PIMSModelSP/GetTaskLog',
+  PIMSModelBackupDB: '/PIMSModel/BackupDB',
+  PIMSModelRecoverDB: '/PIMSModel/RecoverDB',
+  // 历史趋势对比
+  trendData: '/Trend/Trend',
+  // 计划优化报表
+  getProgramList: '/DataAnalysisReport/GetDownList',
+  analysisReport: '/DataAnalysisReport/GetOptPlanRes',
+  getReportFileList: '/PlanReport/GetFileList',
+  getReportSheetList: '/PlanReport/GetSheetList',
+  getReportSheetPreview: '/PlanReport/GetSheetPreview',
+  deleteReportFile: '/PlanReport/DeleteFile'
+}
+export default api

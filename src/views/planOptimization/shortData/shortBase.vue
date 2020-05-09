@@ -36,7 +36,7 @@
                   name="file"
                   :multiple="false"
                   action="/huali-api/File/UploadXYCS"
-                  @change="XYCShandleChange"
+
                 >
                   <a-button shape="round" class="btn"> <a-icon type="upload" /> 上传效益测算表</a-button>
                 </a-upload>
@@ -47,12 +47,12 @@
                   name="file"
                   :multiple="false"
                   action="/huali-api/File/UploadGDJG"
-                  @change="GDJGhandleChange"
+
                 >
                   <a-button shape="round" class="btn"> <a-icon type="upload" /> 上传滚动价格表</a-button>
                 </a-upload>
 
-                <a-select size="small" placeholder="请选择配置表" class="select" style="width: 150px;" @change="configIndexChange">
+                <a-select size="small" placeholder="请选择配置表" class="select" style="width: 170px;" @change="configIndexChange">
                   <a-select-option v-for="(item,index) in configTable" :key="index">
                     {{ item }}
                   </a-select-option
@@ -108,7 +108,7 @@ export default {
   data () {
     return {
       configTable: [
-        '产品表显示配置', '外购表显示配置', '原油表显示配置', '装置表显示配置'
+        '产品表显示配置', '外购表显示配置', '原油表显示配置', '装置表显示配置', '中间库存表配置'
       ],
       menuList: [
         { key: '0', name: '数据显示配置', path: '/planOptimization/shortData/shortBase' },
@@ -116,7 +116,7 @@ export default {
         { key: '2', name: '外购表', path: '/planOptimization/shortData/shortBase/outsourcing' },
         { key: '3', name: '产品表', path: '/planOptimization/shortData/shortBase/product' },
         { key: '4', name: '装置能力表', path: '/planOptimization/shortData/shortBase/DeviceCapabilities' },
-        { key: '5', name: '原油调和表', path: '/planOptimization/shortData/shortBase/blendTable' }
+        { key: '5', name: '中间库存表', path: '/planOptimization/shortData/shortBase/InventoryTable' }
       ],
       currentItem: 0,
       configIndex: -1,
@@ -180,6 +180,9 @@ export default {
         case 3:
           this.setTableData('equipment')
           break
+        case 4:
+          this.setTableData('Inventory')
+          break
       }
     },
     selectItem (index, path) {
@@ -215,29 +218,33 @@ export default {
         this.tableData = rawList
       })
     },
-    productConfig () {
-      this.configIndex = 0
-      this.setTableData('product')
-    },
-    outSourceConfig () {
-      this.configIndex = 1
-      this.setTableData('purchase')
-    },
-    oidConfig () {
-      this.configIndex = 2
-      this.setTableData('crude')
-    },
-    deviceConfig () {
-      this.configIndex = 3
-      this.setTableData('equipment')
-    },
+    // productConfig () {
+    //   this.configIndex = 0
+    //   this.setTableData('product')
+    // },
+    // outSourceConfig () {
+    //   this.configIndex = 1
+    //   this.setTableData('purchase')
+    // },
+    // oidConfig () {
+    //   this.configIndex = 2
+    //   this.setTableData('crude')
+    // },
+    // deviceConfig () {
+    //   this.configIndex = 3
+    //   this.setTableData('equipment')
+    // },
+    // InventoryConfig () {
+    //   this.configIndex = 4
+    //   this.setTableData('Inventory')
+    // },
     updateConfig () {
       if (this.configIndex < 0) {
         this.$message.warning('请选择一个显示配置!')
         return
       }
       // console.log('更新配置');
-      const type = ['product', 'purchase', 'crude', 'equipment'][this.configIndex]
+      const type = ['product', 'purchase', 'crude', 'equipment', 'Inventory'][this.configIndex]
       updateConfig({ dataType: type, configObjList: this.tableData }).then(res => {
         // console.log(res);
         this.$message.success(res.data)

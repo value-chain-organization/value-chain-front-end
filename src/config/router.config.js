@@ -161,10 +161,10 @@ export const asyncRouterMap = [
                 meta: { title: '短周期-装置能力表', permission: [ 'dashboard' ] }
               },
               {
-                path: 'blendTable',
-                name: 'short_blendTable',
-                component: () => import('@/views/planOptimization/shortData/blend'),
-                meta: { title: '短周期-原油调和表', permission: [ 'dashboard' ] }
+                path: 'InventoryTable',
+                name: 'short_InventoryTable',
+                component: () => import('@/views/planOptimization/shortData/Inventory'),
+                meta: { title: '短周期-中间库存表', permission: [ 'dashboard' ] }
               }
             ]
           },

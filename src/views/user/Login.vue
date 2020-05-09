@@ -5,11 +5,14 @@
         <div class="logo">
           <div class="SPC">
             <div class="SPC_logo"></div>
-            <div class="SPC_name">SPC</div>
+            <div class="SPC_name"></div>
           </div>
           <div class="ECUST">
             <div class="ECUST_logo"></div>
-            <div class="ECUST_name"></div>
+            <div class="ECUST_name">
+              <div class="ECUST_cname"></div>
+              <div class="ECUST_ename"></div>
+            </div>
           </div>
         </div>
         <div class="desc">
@@ -222,46 +225,38 @@ export default {
         border-radius: 6px;
         box-shadow: -0px 0 2px #333;
         .logo{
-          // width: 218px;
-          // height: 48px;
-          // background: url("../../../public/static/image/login/login_logo.png");
-          // background-size: 100% 100%;
-          width: 300px;
+          width: 360px;
           height: 170px;
           display: flex;
           justify-content: space-between;
           align-items: baseline;
           .SPC{
-            width: 130px;
+            width: 150px;
             height: 170px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             .SPC_logo{
-              width: 120px;
-              height: 90px;
+              width: 100px;
+              height: 100px;
               background: url("../../../public/static/image/login/SPC_logo.png");
               background-size: 100% 100%;
             }
             .SPC_name{
-              text-align: center;
-              line-height: 40px;
-              font-size:20px;
-              font-weight:400;
-              color:rgba(255,255,255,1);
-              text-shadow: 0 0 5px #333;
-                  // width: 100px;
-              // height: 50px;
-              // background: url("../../../public/static/image/login/SPC_name.png");
-              // background-size: 100% 100%;
+              width: 160px;
+              height: 48px;
+              background: url("../../../public/static/image/login/SPC_name.png");
+              background-size: 100% 100%;
             }
           }
           .ECUST{
-            width: 100px;
-            height: 130px;
+            width: 160px;
+            height: 170px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
             .ECUST_logo{
               width: 100px;
               height: 100px;
@@ -269,10 +264,24 @@ export default {
               background-size: 100% 100%;
             }
             .ECUST_name{
-              width: 100px;
-              height: 26px;
-              background: url("../../../public/static/image/login/ECUST_name.png");
+              width: 160px;
+              height: 50px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              .ECUST_cname{
+                 width: 100px;
+              height: 23px;
+              background: url("../../../public/static/image/login/ECUST_cname.png");
               background-size: 100% 100%;
+              }
+              .ECUST_ename{
+                 width: 160px;
+              height: 23px;
+              background: url("../../../public/static/image/login/ECUST_ename.png");
+              background-size: 100% 100%;
+              }
             }
           }
         }

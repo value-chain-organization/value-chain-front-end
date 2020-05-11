@@ -61,7 +61,7 @@ export default {
     },
     getTableData () {
       showTable({ dataType: 'Inventory' }).then(res => {
-        // console.log(res);
+        console.log(res)
         const rawData = res.data
         const formatData = []
         let record = { name: '', OPEN: {}, MIN: {}, MAX: {}, COST: {}, PRICE: {} }

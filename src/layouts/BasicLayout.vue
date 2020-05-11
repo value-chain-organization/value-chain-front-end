@@ -29,7 +29,7 @@
       :collapsible="true"
     ></side-menu>
 
-    <a-layout :class="[layoutMode, `content-width-${contentWidth}`]" :style="{ minHeight: '100vh',marginLeft:contentPaddingLeft  }">
+    <a-layout :class="[layoutMode, `content-width-${contentWidth}`]" :style="{ minHeight: '100vh',marginLeft:contentPaddingLeft }">
       <!-- layout header -->
       <global-header
         :mode="layoutMode"
@@ -76,13 +76,13 @@ export default {
     RouteView,
     SideMenu,
     GlobalHeader,
-    GlobalFooter,
+    GlobalFooter
   },
   data () {
     return {
       production: config.production,
       collapsed: false,
-      userRole:localStorage.getItem('userrole'),
+      userRole: localStorage.getItem('userrole'),
       menus: []
     }
   },
@@ -92,36 +92,36 @@ export default {
       mainMenu: state => state.permission.addRouters
     }),
     contentPaddingLeft () {
-      if (!this.fixSidebar || this.isMobile() || this.userRole==='Manager') {
+      if (!this.fixSidebar || this.isMobile() || this.userRole === 'Manager') {
         return '0'
       }
       if (this.sidebarOpened) {
         // return '270px'
-        return this.$flexible(180)+'px'
+        return this.$flexible(180) + 'px'
       }
       // return '80px'
-      return  this.$flexible(60)+'px'
+      return this.$flexible(60) + 'px'
     }
   },
   watch: {
     sidebarOpened (val) {
       this.collapsed = !val
     },
-    $route(to,from){
-      if(to.path.indexOf('valueOfOil')>-1){
-        if(this.collapsed===false){
+    $route (to, from) {
+      if (to.path.indexOf('valueOfOil') > -1) {
+        if (this.collapsed === false) {
           this.toggle()
         }
       }
     }
   },
   created () {
-    this.menus = asyncRouterMap.find((item) => item.path === '/').children;
-    this.menus = this.menus.map(menu=>{
-      if(menu.path!=='/valueOfOil' && this.userRole==='Manager'){
-        menu.hidden=true;
+    this.menus = asyncRouterMap.find((item) => item.path === '/').children
+    this.menus = this.menus.map(menu => {
+      if (menu.path !== '/valueOfOil' && this.userRole === 'Manager') {
+        menu.hidden = true
       }
-      return menu;
+      return menu
     })
     this.collapsed = !this.sidebarOpened
   },
